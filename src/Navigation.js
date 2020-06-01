@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Modal, Button} from 'react-native';
+import {Modal} from 'react-native';
+import { Button, Icon } from 'native-base';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
   createDrawerNavigator,
@@ -22,11 +23,9 @@ function Home({navigation}) {
         component={HomeScreen}
         options={{
           headerLeft: () => (
-            <Button
-              onPress={() => navigation.openDrawer()}
-              title="="
-              style={{width: '100%', heigth: '100%', color: '#000'}}
-            />
+            <Button transparent onPress={() => navigation.openDrawer()}>
+              <Icon type="FontAwesome" name="navicon" />
+            </Button>
           ),
         }}
       />
