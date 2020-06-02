@@ -8,9 +8,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalView: {
-    margin: 20,
+    marginTop: 20,
+    marginBottom: 20,
     backgroundColor: 'white',
-    padding: 10,
+    paddingLeft: 10,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -27,14 +28,6 @@ export const styles = StyleSheet.create({
   },
   backTextWhite: {
     color: '#FFF',
-  },
-  rowFront: {
-    alignItems: 'center',
-    backgroundColor: '#CCC',
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-    justifyContent: 'center',
-    height: 50,
   },
   rowBack: {
     alignItems: 'center',
