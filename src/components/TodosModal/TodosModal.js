@@ -1,10 +1,8 @@
-import React, {useState, useEffect, memo} from 'react';
+import React from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   ActivityIndicator,
-  FlatList,
   Animated,
   Dimensions,
 } from 'react-native';
@@ -63,6 +61,18 @@ class Item extends React.PureComponent {
   }
 }
 
+class HidenItem extends React.PureComponent {
+  render() {
+    return (
+      <View style={styles.rowBack}>
+        <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
+          <Text style={styles.backTextWhite}>Delete</Text>
+        </View>
+      </View>
+    );
+  }
+}
+
 class TodosModal extends React.PureComponent {
   state = {
     isLoading: true,
@@ -81,19 +91,11 @@ class TodosModal extends React.PureComponent {
       });
   }
 
-  renderHiddenItem = () => (
-    <View style={styles.rowBack}>
-      <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
-        <Text style={styles.backTextWhite}>Delete</Text>
-      </View>
-    </View>
-  );
-
   animationIsRunning = false;
 
   onSwipeValueChange = (swipeData) => {
     const {key, value} = swipeData;
-    if (value < -widthWindow && !this.animationIsRunning) {
+    if (value < -widthWindow / 2 && !this.animationIsRunning) {
       this.animationIsRunning = true;
       Animated.timing(rowTranslateAnimatedValues[key], {
         toValue: 0,
@@ -111,6 +113,8 @@ class TodosModal extends React.PureComponent {
 
   renderItem = ({item}) => <Item item={item} />;
 
+  renderHiddenItem = () => <HidenItem />;
+
   render() {
     const {isLoading, data} = this.state;
     return (
@@ -121,19 +125,22 @@ class TodosModal extends React.PureComponent {
             !isLoading && {width: Dimensions.get('window').width * 0.8},
           ]}>
           {isLoading ? (
-            <ActivityIndicator />
+            <ActivityIndicator
+              style={{
+                margin: 20,
+              }}
+            />
           ) : (
             <SwipeListView
+              directionalDistanceChangeThreshold={0}
               disableRightSwipe
               data={data}
               renderItem={this.renderItem}
               renderHiddenItem={this.renderHiddenItem}
               rightOpenValue={-widthWindow}
-              previewRowKey={'0'}
-              previewOpenValue={-40}
-              previewOpenDelay={3000}
               onSwipeValueChange={this.onSwipeValueChange}
               keyExtractor={(item) => item.id.toString()}
+              useNativeDriver={false}
             />
           )}
         </View>
