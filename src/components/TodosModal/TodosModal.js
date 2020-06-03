@@ -12,11 +12,14 @@ import {styles} from './styles';
 import {SwipeListView} from 'react-native-swipe-list-view';
 
 const rowTranslateAnimatedValues = {};
-Array(200)
-  .fill('')
-  .forEach((_, i) => {
-    rowTranslateAnimatedValues[`${i}`] = new Animated.Value(1);
-  });
+
+function setRowTranslateAnimatedValues(lenght) {
+  Array(++lenght)
+    .fill('')
+    .forEach((_, i) => {
+      rowTranslateAnimatedValues[`${i}`] = new Animated.Value(1);
+    });
+}
 
 const widthWindow = Dimensions.get('window').width * 0.8;
 
@@ -26,7 +29,7 @@ class Item extends React.PureComponent {
     return (
       <Animated.View
         style={{
-          height: rowTranslateAnimatedValues[item.id].interpolate({
+          height: rowTranslateAnimatedValues[`${item.id}`].interpolate({
             inputRange: [0, 1],
             outputRange: [0, 50],
           }),
@@ -83,6 +86,7 @@ class TodosModal extends React.PureComponent {
     fetch('https://jsonplaceholder.typicode.com/todos')
       .then((response) => response.json())
       .then((json) => {
+        setRowTranslateAnimatedValues(json.length);
         this.setState({data: json});
       })
       .catch((error) => console.error(error))
@@ -97,7 +101,7 @@ class TodosModal extends React.PureComponent {
     const {key, value} = swipeData;
     if (value < -widthWindow / 2 && !this.animationIsRunning) {
       this.animationIsRunning = true;
-      Animated.timing(rowTranslateAnimatedValues[key], {
+      Animated.timing(rowTranslateAnimatedValues[`${key}`], {
         toValue: 0,
         duration: 200,
         useNativeDriver: false,
