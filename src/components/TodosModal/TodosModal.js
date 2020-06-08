@@ -36,26 +36,31 @@ class Item extends React.PureComponent {
         }}>
         <ListItem
           avatar
-          style={{
-            width: widthWindow,
-            backgroundColor: 'white',
-            minHeight: 50,
-            marginLeft: 0,
-          }}>
+          style={[
+            styles.listitem,
+            {
+              width: widthWindow,
+            },
+          ]}>
           <Left>
             <Text>{item.id}</Text>
           </Left>
           <Body>
             <Text>{item.title}</Text>
           </Body>
-          <Right
-            style={{
-              borderBottomWidth: 0,
-            }}>
+          <Right style={styles.icon}>
             {item.completed ? (
-              <Icon type="FontAwesome" name="check" style={{color: 'green'}} />
+              <Icon
+                type="FontAwesome"
+                name="check"
+                style={styles.iconCheckGreen}
+              />
             ) : (
-              <Icon type="FontAwesome" name="close" style={{color: 'red'}} />
+              <Icon
+                type="FontAwesome"
+                name="close"
+                style={styles.iconCloseRed}
+              />
             )}
           </Right>
         </ListItem>
@@ -115,7 +120,7 @@ class TodosModal extends React.PureComponent {
     }
   };
 
-  renderItem = ({item}) => <Item item={item} />;
+  renderItem = ({ item }) => <Item item={item} />;
 
   renderHiddenItem = () => <HidenItem />;
 
@@ -129,11 +134,7 @@ class TodosModal extends React.PureComponent {
             !isLoading && {width: Dimensions.get('window').width * 0.8},
           ]}>
           {isLoading ? (
-            <ActivityIndicator
-              style={{
-                margin: 20,
-              }}
-            />
+            <ActivityIndicator style={styles.loader} />
           ) : (
             <SwipeListView
               directionalDistanceChangeThreshold={0}

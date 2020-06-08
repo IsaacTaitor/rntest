@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Modal} from 'react-native';
-import { Button, Icon } from 'native-base';
+import {Button, Icon} from 'native-base';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
   createDrawerNavigator,

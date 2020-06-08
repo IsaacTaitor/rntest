@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   centeredView: {
@@ -48,5 +47,22 @@ export const styles = StyleSheet.create({
   backRightBtnRight: {
     backgroundColor: 'red',
     right: 0,
+  },
+  listitem: {
+    backgroundColor: 'white',
+    minHeight: 50,
+    marginLeft: 0,
+  },
+  icon: {
+    borderBottomWidth: 0,
+  },
+  iconCheckGreen: {
+    color: 'green',
+  },
+  iconCloseRed: {
+    color: 'red',
+  },
+  loader: {
+    margin: 20,
   },
 });
