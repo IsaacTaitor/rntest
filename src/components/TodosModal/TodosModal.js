@@ -22,6 +22,7 @@ function setRowTranslateAnimatedValues(lenght) {
 }
 
 const widthWindow = Dimensions.get('window').width;
+const ITEM_HEIGHT = 50;
 
 class Item extends React.PureComponent {
   render() {
@@ -31,7 +32,7 @@ class Item extends React.PureComponent {
         style={{
           height: rowTranslateAnimatedValues[`${item.id}`].interpolate({
             inputRange: [0, 1],
-            outputRange: [0, 50],
+            outputRange: [0, ITEM_HEIGHT],
           }),
         }}>
         <ListItem
@@ -112,7 +113,7 @@ class TodosModal extends React.PureComponent {
         useNativeDriver: false,
       }).start(() => {
         const newData = [...this.state.data];
-        const prevIndex = newData.findIndex((item) => item.id === key);
+        const prevIndex = newData.findIndex((item) => item.id == key);
         newData.splice(prevIndex, 1);
         this.setState({data: newData});
         this.animationIsRunning = false;
@@ -146,6 +147,10 @@ class TodosModal extends React.PureComponent {
               onSwipeValueChange={this.onSwipeValueChange}
               keyExtractor={(item) => item.id.toString()}
               useNativeDriver={false}
+              removeClippedSubviews={true}
+              getItemLayout={(data, index) => (
+                {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}
+              )}
             />
           )}
         </View>
