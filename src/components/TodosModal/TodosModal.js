@@ -21,7 +21,7 @@ function setRowTranslateAnimatedValues(lenght) {
     });
 }
 
-const widthWindow = Dimensions.get('window').width * 0.8;
+const widthWindow = Dimensions.get('window').width;
 
 class Item extends React.PureComponent {
   render() {
@@ -131,7 +131,7 @@ class TodosModal extends React.PureComponent {
         <View
           style={[
             styles.modalView,
-            !isLoading && {width: Dimensions.get('window').width * 0.8},
+            // !isLoading && {width: Dimensions.get('window').width * 0.8},
           ]}>
           {isLoading ? (
             <ActivityIndicator style={styles.loader} />

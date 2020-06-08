@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalView: {
-    marginTop: 20,
-    marginBottom: 20,
+    width: '100%',
+    height: '100%',
     backgroundColor: 'white',
     paddingLeft: 10,
     alignItems: 'center',
@@ -63,6 +63,8 @@ export const styles = StyleSheet.create({
     color: 'red',
   },
   loader: {
-    margin: 20,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
